@@ -1,5 +1,5 @@
 {
-    "name": "appslabke/yet-another-acl",
+    "name": "appslabke/another-laravel-acl",
     "description": "This is another user roles and permission management simple enough",
     "type": "library",
     "license": "MIT",
@@ -9,7 +9,7 @@
         "yet another acl",
         "laravel roles and permissions"
     ],
-    "homepage": "https://github.com/AppsLab-KE/laravel-easy-search",
+    "homepage": "https://github.com/AppsLab-KE/yet-another-laravel-acl",
     "authors": [
         {
             "name": "Marvin Collins",
@@ -41,7 +41,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AppsLab\\Alc\\YetAnotherAclBaseServiceProvider"
+                "AppsLab\\Acl\\YetAnotherAclServiceProvider"
             ]
         }
     }
