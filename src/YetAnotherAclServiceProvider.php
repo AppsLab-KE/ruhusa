@@ -3,7 +3,6 @@
 
 namespace AppsLab\Acl;
 
-
 use AppsLab\Acl\Middleware\YaaMiddleware;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
