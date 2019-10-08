@@ -1,0 +1,17 @@
+{
+    "name": "appslabke/yet-another-acl",
+    "description": "This is another user roles and permission mnagement",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Marvin",
+            "email": "marvin@appslab.co.ke"
+        }
+    ],
+    "minimum-stability": "beta",
+    "require": {},
+    "require-dev": {
+        "orchestra/testbench": "^4.1"
+    }
+}
