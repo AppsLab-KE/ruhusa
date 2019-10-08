@@ -1,10 +1,10 @@
 <?php
 
 
-namespace AppsLab\Alc\Tests\Feature;
+namespace AppsLab\Acl\Tests\Feature;
 
 use AppsLab\Acl\Models\Role;
-use AppsLab\Alc\Tests\TestCase;
+use AppsLab\Acl\Tests\TestCase;
 
 class ModelFeatureTest extends TestCase
 {

@@ -1,7 +1,7 @@
 <?php
 
 
-namespace AppsLab\Alc\Tests;
+namespace AppsLab\Acl\Tests;
 
 
 use AppsLab\Acl\YetAnotherAlcBaseServiceProvider;

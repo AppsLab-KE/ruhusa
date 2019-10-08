@@ -16,12 +16,17 @@ return [
         'permission'    => '\AppsLab\Acl\Models\Permission::class',
         'defaultUser'   => config('auth.providers.users.model'),
     ],
+
+    /*
+  |--------------------------------------------------------------------------
+  | Tables
+  |--------------------------------------------------------------------------
+  |
+  | If you want, you can replace default tables from this package
+  |
+  */
     'tables' => [
         'role' => 'roles',
         'permission' => 'permissions'
-    ],
-    'user_model' => [
-        'model' => 'App\User',
-        'table' => 'users' //many to many relationship
     ]
 ];
