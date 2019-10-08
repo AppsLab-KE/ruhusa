@@ -17,6 +17,8 @@ class ModelFeatureTest extends TestCase
     {
         $role = new Role();
 
+//        dd(app(Role::class)::get());
+
 //        $this->assertCount(1, Role::all());
     }
 }

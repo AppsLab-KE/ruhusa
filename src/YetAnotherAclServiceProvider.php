@@ -4,7 +4,6 @@
 namespace AppsLab\Acl;
 
 use AppsLab\Acl\Middleware\YaaMiddleware;
-use AppsLab\Acl\Models\Permission;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
@@ -17,7 +16,7 @@ class YetAnotherAclServiceProvider extends ServiceProvider
         $this->registerResources();
         $this->registerBladeExtensions();
 
-         Permission::get()->map(function ($permission){
+        app(config('yaa.models.permission'))::get()->map(function ($permission){
             Gate::define($permission->slug, function ($user) use($permission){
                 return $user->hasPermissionTo($permission);
             });
