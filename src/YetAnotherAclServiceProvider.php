@@ -13,19 +13,24 @@ class YetAnotherAclServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->app['router']->aliasMiddleware('role', YaaMiddleware::class);
+        if ($this->app->runningInConsole()){
+            $this->registerPublishing();
+        }
         $this->registerResources();
         $this->registerBladeExtensions();
 
-        app(config('yaa.models.permission'))::get()->map(function ($permission){
-            Gate::define($permission->slug, function ($user) use($permission){
-                return $user->hasPermissionTo($permission);
+        if (config('yaa.models.permission')){
+            app(config('yaa.models.permission'))::get()->map(function ($permission){
+                Gate::define($permission->slug, function ($user) use($permission){
+                    return $user->hasPermissionTo($permission);
+                });
             });
-        });
+        }
     }
 
     public function register()
     {
-        
+
     }
 
     private function registerResources()
@@ -41,5 +46,12 @@ class YetAnotherAclServiceProvider extends ServiceProvider
         Blade::directive('endrole', function (){
             return "<?php endif; ?>";
         });
+    }
+
+    private function registerPublishing()
+    {
+        $this->publishes([
+            __DIR__.'/../config/yaa.php' => 'config/yaa.php'
+        ],'yaa-config');
     }
 }

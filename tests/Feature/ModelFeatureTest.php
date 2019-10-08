@@ -17,7 +17,7 @@ class ModelFeatureTest extends TestCase
     {
         $role = new Role();
 
-//        dd(app(Role::class)::get());
+        dd(config('yaa.models.permission'));
 
 //        $this->assertCount(1, Role::all());
     }
