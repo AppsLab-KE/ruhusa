@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
-class YetAnotherAlcBaseServiceProvider extends ServiceProvider
+class YetAnotherAclServiceProvider extends ServiceProvider
 {
     public function boot()
     {
