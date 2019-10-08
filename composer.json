@@ -3,15 +3,46 @@
     "description": "This is another user roles and permission mnagement",
     "type": "library",
     "license": "MIT",
+    "keywords": [
+        "appslab",
+        "acl",
+        "yet another acl",
+        "laravel roles and permissions"
+    ],
+    "homepage": "https://github.com/AppsLab-KE/laravel-easy-search",
     "authors": [
         {
-            "name": "Marvin",
+            "name": "Marvin Collins",
             "email": "marvin@appslab.co.ke"
         }
     ],
     "minimum-stability": "beta",
-    "require": {},
+    "require": {
+        "php": "^7.1",
+        "doctrine/dbal": "^2.8",
+        "hirak/prestissimo": "^0.3.9"
+    },
     "require-dev": {
-        "orchestra/testbench": "^4.1"
+        "orchestra/testbench": "^4.1",
+        "mockery/mockery": "^1.2"
+    },
+    "autoload": {
+        "files": [
+        ],
+        "psr-4": {
+            "AppsLab\\Acl\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AppsLab\\Alc\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "AppsLab\\Alc\\YetAnotherAlcBaseServiceProvider"
+            ]
+        }
     }
 }
