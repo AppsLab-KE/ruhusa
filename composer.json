@@ -27,8 +27,6 @@
         "mockery/mockery": "^1.2"
     },
     "autoload": {
-        "files": [
-        ],
         "psr-4": {
             "AppsLab\\Acl\\": "src/"
         }
