@@ -15,8 +15,10 @@ class ModelFeatureTest extends TestCase
 
     public function testCanCreateRole()
     {
-        $role = factory(Role::class)->create();
+        $role = new Role();
 
-        $this->assertCount(1, Role::all());
+        dd($role);
+
+//        $this->assertCount(1, Role::all());
     }
 }
