@@ -12,8 +12,8 @@ return [
    */
 
     'models' => [
-        'role'          => '\AppsLab\Acl\Models\Role::class',
-        'permission'    => '\AppsLab\Acl\Models\Permission::class',
+        'role'          => '\AppsLab\Acl\Models\Role',
+        'permission'    => '\AppsLab\Acl\Models\Permission',
         'defaultUser'   => config('auth.providers.users.model'),
     ],
 

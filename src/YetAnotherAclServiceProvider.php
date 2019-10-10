@@ -19,7 +19,7 @@ class YetAnotherAclServiceProvider extends ServiceProvider
         $this->registerResources();
         $this->registerBladeExtensions();
 
-        if (config('yaa.models.permission')){
+        if (config('yaa.models.permission') && Schema::hasTable(config('yaa.tables.permission'))){
             app(config('yaa.models.permission'))::get()->map(function ($permission){
                 Gate::define($permission->slug, function ($user) use($permission){
                     return $user->hasPermissionTo($permission);
@@ -50,8 +50,23 @@ class YetAnotherAclServiceProvider extends ServiceProvider
 
     private function registerPublishing()
     {
+        //this is to allow you to modify the tables according to your project need
+        
+        $this->publishes([
+            __DIR__.'/../databases/migrations/2018_10_12_000000_create_permissions_table.php' =>
+            'databases/migrations/2018_10_12_000000_create_permissions_table.php',
+            __DIR__.'/../databases/migrations/2018_10_12_000000_create_roles_table.php' =>
+            'databases/migrations/2018_10_12_000000_create_roles_table.php',
+            __DIR__.'/../databases/migrations/2018_11_24_105604_create_users_permissions_table.php' =>
+            'databases/migrations/2018_11_24_105604_create_users_permissions_table.php',
+            __DIR__.'/../databases/migrations/2018_11_24_105604_create_users_roles_table.php' =>
+             'databases/migrations/2018_11_24_105604_create_users_roles_table.php',
+             __DIR__.'/../databases/migrations/2018_11_24_110643_create_roles_permissions_table.php' =>
+             'databases/migrations/2018_11_24_110643_create_roles_permissions_table.php',
+        ], 'yaa-db');
+
         $this->publishes([
             __DIR__.'/../config/yaa.php' => 'config/yaa.php'
-        ],'yaa-config');
+        ], 'yaa-config');
     }
 }
