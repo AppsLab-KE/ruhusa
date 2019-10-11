@@ -18,7 +18,7 @@ class CreatePermission extends Command
 
     public function handle()
     {
-            $permModel = app(config('ala.models.permission'));
+            $permModel = app(config('ruhusa.models.permission'));
 
             if ($permModel){
                 try{
@@ -41,7 +41,7 @@ class CreatePermission extends Command
                 }
             }
             else{
-                $this->error("Check your permission class in ala config");
+                $this->error("Check your permission class in ruhusa config");
             }
     }
 }

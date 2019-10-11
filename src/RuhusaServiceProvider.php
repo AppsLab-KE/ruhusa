@@ -22,8 +22,8 @@ class RuhusaServiceProvider extends ServiceProvider
         $this->registerResources();
         $this->registerBladeExtensions();
 
-        if (config('yaa.models.permission') && Schema::hasTable(config('yaa.tables.permission'))){
-            app(config('yaa.models.permission'))::get()->map(function ($permission){
+        if (config('ruhusa.models.permission') && Schema::hasTable(config('ruhusa.tables.permission'))){
+            app(config('ruhusa.models.permission'))::get()->map(function ($permission){
                 Gate::define($permission->slug, function ($user) use($permission){
                     return $user->hasPermissionTo($permission);
                 });

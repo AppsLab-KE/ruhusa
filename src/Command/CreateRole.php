@@ -18,7 +18,7 @@ class CreateRole extends Command
 
     public function handle()
     {
-            $roleModel = app(config('ala.models.role'));
+            $roleModel = app(config('ruhusa.models.role'));
 
             if ($roleModel){
                 try{
@@ -41,7 +41,7 @@ class CreateRole extends Command
                 }
             }
             else{
-                $this->error("Check your role class in ala config");
+                $this->error("Check your role class in ruhusa config");
             }
     }
 }
