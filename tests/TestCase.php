@@ -3,14 +3,14 @@
 
 namespace AppsLab\Acl\Tests;
 
-use AppsLab\Acl\YetAnotherAclServiceProvider;
+use AppsLab\Acl\RuhusaServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
     protected function getPackageProviders($app)
     {
         return  [
-            YetAnotherAclServiceProvider::class
+            RuhusaServiceProvider::class
         ];
     }
 

@@ -5,11 +5,11 @@ namespace Appslab\Acl\Command;
 use AppsLab\Acl\Exceptions\AlreadyExist;
 use Illuminate\Console\Command;
 
-class CreatePermission extends Command
+class CreateRole extends Command
 {
-    protected $signature = 'make:perm {-n|name} {-s|slug} {-d|description}';
+    protected $signature = 'make:role {-n|name} {-s|slug} {-d|description}';
 
-    protected $description = 'This will create permission in permission table';
+    protected $description = 'This will create role in role table';
 
     public function __construct()
     {
@@ -18,30 +18,30 @@ class CreatePermission extends Command
 
     public function handle()
     {
-            $permModel = app(config('ala.models.permission'));
+            $roleModel = app(config('ala.models.role'));
 
-            if ($permModel){
+            if ($roleModel){
                 try{
-                    $permission = $permModel->where('slug', $this->argument('slug'))
+                    $role = $roleModel->where('slug', $this->argument('slug'))
                         ->orWhere('name', $this->argument('name'))->first();
 
-                    if (! is_null($permission)){
+                    if (! is_null($role)){
                         throw  AlreadyExist::exception($this->argument('name'));
                     }
 
-                    $permModel->create([
+                    $roleModel->create([
                         'name' => $this->argument('name'),
                         'slug' => $this->argument('slug'),
                         'description' => $this->argument('description')
                     ]);
 
-                    $this->info($this->argument('name'). " permission was created successfully");
+                    $this->info($this->argument('name'). " role was created successfully");
                 }catch (\Exception $exception){
-                    $this->error("Permission was not created");
+                    $this->error("Role was not created");
                 }
             }
             else{
-                $this->error("Check your permission class in ala config");
+                $this->error("Check your role class in ala config");
             }
     }
 }

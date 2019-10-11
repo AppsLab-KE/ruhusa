@@ -6,12 +6,12 @@ trait HasAcl
 {
     public function roles()
     {
-        return $this->belongsToMany(config('yaa.models.role'));
+        return $this->belongsToMany(config('ala.models.role'));
     }
 
     public function permissions()
     {
-        return $this->belongsToMany(config('yaa.models.permission'));
+        return $this->belongsToMany(config('ala.models.permission'));
     }
 
     public function hasRole(... $roles)
@@ -82,7 +82,7 @@ trait HasAcl
 
     protected function getAllPermissions(array $permissions)
     {
-        return config('yaa.models.permission')::whereIn('slug', $permissions)->get();
+        return config('ala.models.permission')::whereIn('slug', $permissions)->get();
     }
 
     public function updatePermissions( ... $permissions )
@@ -99,7 +99,7 @@ trait HasAcl
 
     protected function getAllRoles(array $roles)
     {
-        return config('yaa.models.roles')::where('slug', $roles)->get();
+        return config('ala.models.roles')::where('slug', $roles)->get();
     }
 
 }

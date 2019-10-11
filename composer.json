@@ -9,7 +9,7 @@
         "ruhusa",
         "laravel roles and permissions"
     ],
-    "homepage": "https://github.com/AppsLab-KE/yet-another-laravel-acl",
+    "homepage": "https://github.com/AppsLab-KE/ruhusa",
     "authors": [
         {
             "name": "Marvin Collins",
@@ -41,7 +41,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "AppsLab\\Acl\\YetAnotherAclServiceProvider"
+                "AppsLab\\Acl\\RuhusaServiceProvider"
             ]
         }
     }

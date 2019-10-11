@@ -4,7 +4,7 @@ namespace AppsLab\Acl\Middleware;
 
 use Closure;
 
-class YaaMiddleware
+class RuhusaMiddleware
 {
     /**
      * Handle an incoming request.

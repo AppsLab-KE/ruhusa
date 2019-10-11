@@ -3,16 +3,16 @@
 
 namespace AppsLab\Acl;
 
-use AppsLab\Acl\Middleware\YaaMiddleware;
+use AppsLab\Acl\Middleware\RuhusaMiddleware;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
-class YetAnotherAclServiceProvider extends ServiceProvider
+class RuhusaServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->app['router']->aliasMiddleware('role', YaaMiddleware::class);
+        $this->app['router']->aliasMiddleware('role', RuhusaMiddleware::class);
         if ($this->app->runningInConsole()){
             $this->registerPublishing();
         }
@@ -63,7 +63,7 @@ class YetAnotherAclServiceProvider extends ServiceProvider
              'databases/migrations/2018_11_24_105604_create_users_roles_table.php',
              __DIR__.'/../databases/migrations/2018_11_24_110643_create_roles_permissions_table.php' =>
              'databases/migrations/2018_11_24_110643_create_roles_permissions_table.php',
-            __DIR__.'/../config/yaa.php' => 'config/ala.php'
+            __DIR__ . '/../config/ruhusa.php' => 'config/ala.php'
 
         ], 'another-laravel-acl');
     }
