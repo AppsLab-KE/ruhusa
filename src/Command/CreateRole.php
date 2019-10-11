@@ -26,7 +26,7 @@ class CreateRole extends Command
                         ->orWhere('name', $this->argument('name'))->first();
 
                     if (! is_null($role)){
-                        throw  AlreadyExist::exception($this->argument('name'));
+                        throw  AlreadyExist::exception($this->argument('name'). ' role');
                     }
 
                     $roleModel->create([

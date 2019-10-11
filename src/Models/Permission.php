@@ -12,10 +12,10 @@ class Permission extends Model
 
     public function __construct()
     {
-        $this->table = config('yaa.tables.permission');
+        $this->table = config('ruhusa.tables.permission');
     }
 
     protected $fillable = [
-        'slug','name'
+        'slug','name','description'
     ];
 }

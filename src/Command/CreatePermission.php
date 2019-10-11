@@ -26,7 +26,7 @@ class CreatePermission extends Command
                         ->orWhere('name', $this->argument('name'))->first();
 
                     if (! is_null($permission)){
-                        throw  AlreadyExist::exception($this->argument('name'));
+                        throw  AlreadyExist::exception($this->argument('name').' permission');
                     }
 
                     $permModel->create([
