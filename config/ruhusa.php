@@ -27,6 +27,9 @@ return [
   */
     'tables' => [
         'role' => 'roles',
-        'permission' => 'permissions'
+        'permission' => 'permissions',
+        'users_roles' => 'users_roles',
+        'users_permissions' => 'users_permissions',
+        'roles_permissions' => 'roles_permissions',
     ]
 ];

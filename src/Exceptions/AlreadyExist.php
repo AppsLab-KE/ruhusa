@@ -4,7 +4,9 @@
 namespace AppsLab\Acl\Exceptions;
 
 
-class AlreadyExist
+use InvalidArgumentException;
+
+class AlreadyExist extends InvalidArgumentException
 {
     public static function exception($item)
     {

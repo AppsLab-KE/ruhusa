@@ -3,6 +3,8 @@
 
 namespace AppsLab\Acl;
 
+use AppsLab\Acl\Middleware\PermissionMiddleware;
+use AppsLab\Acl\Middleware\RoleMiddleware;
 use AppsLab\Acl\Middleware\RuhusaMiddleware;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
@@ -12,7 +14,8 @@ class RuhusaServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->app['router']->aliasMiddleware('role', RuhusaMiddleware::class);
+        $this->app['router']->aliasMiddleware('roles', RoleMiddleware::class);
+        $this->app['router']->aliasMiddleware('permissions', PermissionMiddleware::class);
         if ($this->app->runningInConsole()){
             $this->registerPublishing();
         }
@@ -43,6 +46,11 @@ class RuhusaServiceProvider extends ServiceProvider
         Blade::directive('role', function ($role){
             return "<?php if(auth()->check() && auth()->user()->hasRole({$role})) : ?>";
         });
+
+        Blade::directive('elserole', function ($role){
+            return "<?php else if(auth()->check() && auth()->user()->hasRole({$role})) : ?>";
+        });
+
         Blade::directive('endrole', function (){
             return "<?php endif; ?>";
         });

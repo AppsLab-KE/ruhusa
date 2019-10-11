@@ -2,22 +2,24 @@
 
 namespace AppsLab\Acl\Traits;
 
+use Illuminate\Database\Eloquent\Model;
+
 trait HasAcl
 {
     public function roles()
     {
-        return $this->belongsToMany(config('ala.models.role'));
+        return $this->belongsToMany(config('ruhusa.models.role'));
     }
 
     public function permissions()
     {
-        return $this->belongsToMany(config('ala.models.permission'));
+        return $this->belongsToMany(config('ruhusa.models.permission'));
     }
 
     public function hasRole(... $roles)
     {
-        foreach ($roles as $role){
-            if ($this->roles->contains('slug', $role)){
+        foreach ($this->getRoleIds($roles) as $role){
+            if ($this->roles->contains('id', $role)){
                 return true;
             }
         }
@@ -25,21 +27,108 @@ trait HasAcl
         return false;
     }
 
-    public function hasPermissionTo($permission)
+    public function isAdmin()
     {
-        return $this->hasPermissionThroughRole($permission) || $this->hasPermission($permission);
+        return $this->hasPermission(['admin']);
     }
 
-    protected function hasPermission($permission) : bool
+    private function getRoleIds(array $roles)
     {
-        return (bool) $this->permissions->where('slug', $permission->slug)->count();
+        $roleIds = [];
+        foreach ($roles as $role) {
+            $roleId = $this->getRoleId($role);
+            if ($roleId){
+                array_push($roleIds, $roleId);
+            }
+        }
+
+        return $roleIds;
     }
 
-    public function hasPermissionThroughRole($permission) : bool
+    private function getRoleId($role)
     {
-        foreach ($permission->roles as $role){
-            if ($this->roles->contains($role)){
-                return true;
+        $roleModel = app(config('ruhusa.models.role'));
+        if (is_numeric($role)){
+            return $role;
+        }
+
+        if (is_string($role)){
+            $role = $roleModel->where('slug', $role)->first();
+
+            return $role != null ? $role->id : false;
+        }
+
+        if ($role instanceof Model){
+            return $role->id;
+        }
+
+        return false;
+    }
+
+    public function hasPermissionTo(... $permissions)
+    {
+        return $this->hasPermissionThroughRole($permissions) || $this->hasPermission($permissions);
+    }
+
+    protected function hasPermission(array $permissions) : bool
+    {
+
+        foreach ($permissions as $permission) {
+            return (bool) $this->permissions->where('id', $this->getPermissionId($permission))->count();
+        }
+
+        return false;
+    }
+
+    private function getPermissionIds(array $permissions)
+    {
+        $permissionIds = [];
+
+        foreach ($permissions as $permission) {
+            $permissionId = $this->getPermissionId($permission);
+            if ($permission){
+                array_push($permissionIds, $permissionId);
+            }
+        }
+
+        return $permissionIds;
+    }
+
+    private function getPermissionId($permission)
+    {
+        $getPermission = null;
+        $permModel = app(config('ruhusa.models.permission'));
+
+        if (is_numeric($permission)){
+            return $permission;
+        }
+
+        if (is_string($permission)){
+            $getPermission = $permModel->where('slug', $permission)->first();
+        }
+
+        if ($permission instanceof Model){
+            $getPermission = $permission->first();
+        }
+
+        if ($getPermission != null){
+            return $getPermission->id;
+        }
+
+        return false;
+    }
+
+    public function hasPermissionThroughRole(array $permissions) : bool
+    {
+        foreach ($permissions as $permission) {
+            $permModel = app(config('ruhusa.models.permission'))->where('id', $this->getPermissionId($permission))->first();
+
+            if ($permModel){
+                foreach ($permModel->roles as $role){
+                    if ($this->roles->contains($role)){
+                        return true;
+                    }
+                }
             }
         }
 
@@ -48,12 +137,8 @@ trait HasAcl
 
     public function givePermissionsTo( ... $permissions )
     {
-        $permissions = $this->getAllPermissions($permissions);
-
-        if ($permissions !== null){
-
-            $this->permissions()->sync($permissions);
-//            $this->permissions()->attach($permissions);
+        if (count($permissions)){
+            $this->permissions()->sync($this->getPermissionIds($permissions));
         }
 
         return $this;
@@ -61,45 +146,39 @@ trait HasAcl
 
     public function giveRoles( ... $roles )
     {
-        $roles = $this->getAllRoles($roles);
-
-        if($roles !== null){
-            $this->roles()->attach($roles);
+        if(count($roles)){
+            $this->roles()->attach($this->getRoleIds($roles));
         }
+
+        return $this;
     }
 
     public function withdrawRoles( ... $roles )
     {
-        $this->roles()->detach($this->getAllRoles($roles));
+        $this->roles()->detach($this->getRoleIds($roles));
         return $this;
     }
 
     public function withdrawPermissionsTo( ... $permissions )
     {
-        $this->permissions()->detach($this->getAllPermissions($permissions));
+        if (count($permissions)){
+            $this->permissions()->detach($this->getPermissionIds($permissions));
+        }
         return $this;
-    }
-
-    protected function getAllPermissions(array $permissions)
-    {
-        return config('ala.models.permission')::whereIn('slug', $permissions)->get();
     }
 
     public function updatePermissions( ... $permissions )
     {
-        $this->permissions()->sync($this->getAllPermissions($permissions));
+        if (count($permissions)){
+            $this->permissions()->sync($this->getPermissionIds($permissions));
+        }
         return $this;
     }
 
     public function updateRoles( ... $roles )
     {
-        $this->roles()->sync($this->getAllRoles($roles));
+        $this->roles()->sync($this->getRoleIds($roles));
         return $this;
-    }
-
-    protected function getAllRoles(array $roles)
-    {
-        return config('ala.models.roles')::where('slug', $roles)->get();
     }
 
 }
