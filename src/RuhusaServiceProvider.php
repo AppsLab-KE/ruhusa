@@ -65,6 +65,6 @@ class RuhusaServiceProvider extends ServiceProvider
              'databases/migrations/2018_11_24_110643_create_roles_permissions_table.php',
             __DIR__ . '/../config/ruhusa.php' => 'config/ala.php'
 
-        ], 'another-laravel-acl');
+        ], 'ruhusa');
     }
 }
