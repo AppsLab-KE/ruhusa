@@ -1,19 +1,21 @@
 {
-    "name": "appslabke/another-laravel-acl",
+    "name": "appslabke/ruhusa",
     "description": "This is another user roles and permission management simple enough",
     "type": "library",
     "license": "MIT",
     "keywords": [
         "appslab",
         "acl",
-        "yet another acl",
+        "ruhusa",
         "laravel roles and permissions"
     ],
     "homepage": "https://github.com/AppsLab-KE/yet-another-laravel-acl",
     "authors": [
         {
             "name": "Marvin Collins",
-            "email": "marvin@appslab.co.ke"
+            "email": "marvin@appslab.co.ke",
+            "role": "CEO",
+            "homepage": "https://appslab.co.ke"
         }
     ],
     "minimum-stability": "beta",
