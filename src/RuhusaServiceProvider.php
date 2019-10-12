@@ -3,6 +3,9 @@
 
 namespace AppsLab\Acl;
 
+use Appslab\Acl\Command\CreatePermission;
+use Appslab\Acl\Command\CreateRole;
+use Appslab\Acl\Command\Install;
 use AppsLab\Acl\Middleware\PermissionMiddleware;
 use AppsLab\Acl\Middleware\RoleMiddleware;
 use AppsLab\Acl\Middleware\RuhusaMiddleware;
@@ -16,19 +19,14 @@ class RuhusaServiceProvider extends ServiceProvider
     {
         $this->app['router']->aliasMiddleware('roles', RoleMiddleware::class);
         $this->app['router']->aliasMiddleware('permissions', PermissionMiddleware::class);
+
         if ($this->app->runningInConsole()){
             $this->registerPublishing();
+            $this->loadCommands();
         }
         $this->registerResources();
         $this->registerBladeExtensions();
-
-        if (config('ruhusa.models.permission') && Schema::hasTable(config('ruhusa.tables.permission'))){
-            app(config('ruhusa.models.permission'))::get()->map(function ($permission){
-                Gate::define($permission->slug, function ($user) use($permission){
-                    return $user->hasPermissionTo($permission);
-                });
-            });
-        }
+        $this->authorize();
     }
 
     public function register()
@@ -74,5 +72,25 @@ class RuhusaServiceProvider extends ServiceProvider
             __DIR__ . '/../config/ruhusa.php' => 'config/ala.php'
 
         ], 'ruhusa');
+    }
+
+    protected function authorize()
+    {
+        if (config('ruhusa.models.permission') && Schema::hasTable(config('ruhusa.tables.permission'))){
+            app(config('ruhusa.models.permission'))::get()->map(function ($permission){
+                Gate::define($permission->slug, function ($user) use($permission){
+                    return $user->hasPermissionTo($permission);
+                });
+            });
+        }
+    }
+
+    protected function loadCommands()
+    {
+        $this->commands([
+            Install::class,
+            CreateRole::class,
+            CreatePermission::class
+        ]);
     }
 }
