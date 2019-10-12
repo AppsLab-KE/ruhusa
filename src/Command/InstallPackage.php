@@ -5,7 +5,7 @@ namespace Appslab\Acl\Command;
 use AppsLab\Acl\Exceptions\AlreadyExist;
 use Illuminate\Console\Command;
 
-class Install extends Command
+class InstallPackage extends Command
 {
     protected $signature = 'ruhusa:install';
 

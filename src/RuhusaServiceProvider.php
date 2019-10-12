@@ -5,7 +5,7 @@ namespace AppsLab\Acl;
 
 use Appslab\Acl\Command\CreatePermission;
 use Appslab\Acl\Command\CreateRole;
-use Appslab\Acl\Command\Install;
+use Appslab\Acl\Command\InstallPackage;
 use AppsLab\Acl\Middleware\PermissionMiddleware;
 use AppsLab\Acl\Middleware\RoleMiddleware;
 use AppsLab\Acl\Middleware\RuhusaMiddleware;
@@ -87,10 +87,12 @@ class RuhusaServiceProvider extends ServiceProvider
 
     protected function loadCommands()
     {
-        $this->commands([
-            Install::class,
-            CreateRole::class,
-            CreatePermission::class
-        ]);
+        if ($this->app->runningInConsole()){
+            $this->commands([
+                InstallPackage::class,
+                CreateRole::class,
+                CreatePermission::class
+            ]);
+        }
     }
 }
