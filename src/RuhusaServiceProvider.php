@@ -69,7 +69,7 @@ class RuhusaServiceProvider extends ServiceProvider
              'databases/migrations/2018_11_24_105604_create_users_roles_table.php',
              __DIR__.'/../databases/migrations/2018_11_24_110643_create_roles_permissions_table.php' =>
              'databases/migrations/2018_11_24_110643_create_roles_permissions_table.php',
-            __DIR__ . '/../config/ruhusa.php' => 'config/ala.php'
+            __DIR__ . '/../config/ruhusa.php' => 'config/ruhusa.php'
 
         ], 'ruhusa');
     }
