@@ -16,9 +16,10 @@ class Permission extends Model
         'deleted_at'
     ];
 
-    public function __construct()
+    public function __construct(array $attributes = [])
     {
-        $this->table = config('ruhusa.tables.permission');
+        parent::__construct($attributes);
+        $this->setTable(config('ruhusa.tables.permission'));
     }
 
     protected $fillable = [

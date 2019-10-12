@@ -11,6 +11,7 @@ use AppsLab\Acl\Middleware\RoleMiddleware;
 use AppsLab\Acl\Middleware\RuhusaMiddleware;
 use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class RuhusaServiceProvider extends ServiceProvider
@@ -35,7 +36,7 @@ class RuhusaServiceProvider extends ServiceProvider
 
     private function registerResources()
     {
-        $this->loadMigrationsFrom(__DIR__.'/../databases/migrations');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
     }
 
     private function registerBladeExtensions()
@@ -58,16 +59,16 @@ class RuhusaServiceProvider extends ServiceProvider
         //this is to allow you to modify the tables according to your project need
 
         $this->publishes([
-            __DIR__.'/../databases/migrations/2018_10_12_000000_create_permissions_table.php' =>
-            'databases/migrations/2018_10_12_000000_create_permissions_table.php',
-            __DIR__.'/../databases/migrations/2018_10_12_000000_create_roles_table.php' =>
-            'databases/migrations/2018_10_12_000000_create_roles_table.php',
-            __DIR__.'/../databases/migrations/2018_11_24_105604_create_users_permissions_table.php' =>
-            'databases/migrations/2018_11_24_105604_create_users_permissions_table.php',
-            __DIR__.'/../databases/migrations/2018_11_24_105604_create_users_roles_table.php' =>
-             'databases/migrations/2018_11_24_105604_create_users_roles_table.php',
-             __DIR__.'/../databases/migrations/2018_11_24_110643_create_roles_permissions_table.php' =>
-             'databases/migrations/2018_11_24_110643_create_roles_permissions_table.php',
+            __DIR__.'/../database/migrations/2018_10_12_000000_create_permissions_table.php' =>
+            'database/migrations/2018_10_12_000000_create_permissions_table.php',
+            __DIR__.'/../database/migrations/2018_10_12_000000_create_roles_table.php' =>
+            'database/migrations/2018_10_12_000000_create_roles_table.php',
+            __DIR__.'/../database/migrations/2018_11_24_105604_create_users_permissions_table.php' =>
+            'database/migrations/2018_11_24_105604_create_users_permissions_table.php',
+            __DIR__.'/../database/migrations/2018_11_24_105604_create_users_roles_table.php' =>
+             'database/migrations/2018_11_24_105604_create_users_roles_table.php',
+             __DIR__.'/../database/migrations/2018_11_24_110643_create_roles_permissions_table.php' =>
+             'database/migrations/2018_11_24_110643_create_roles_permissions_table.php',
             __DIR__ . '/../config/ruhusa.php' => 'config/ruhusa.php'
 
         ], 'ruhusa');

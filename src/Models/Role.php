@@ -15,9 +15,10 @@ class Role extends Model
     ];
     protected $table;
 
-    public function __construct()
+    public function __construct(array $attributes = [])
     {
-        $this->table = config('ruhusa.tables.role');
+        parent::__construct($attributes);
+        $this->setTable(config('ruhusa.tables.role'));
     }
 
     protected $fillable = [
