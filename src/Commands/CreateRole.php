@@ -1,6 +1,6 @@
 <?php
 
-namespace Appslab\Acl\Command;
+namespace AppsLab\Acl\Commands;
 
 use AppsLab\Acl\Exceptions\AlreadyExist;
 use Illuminate\Console\Command;
