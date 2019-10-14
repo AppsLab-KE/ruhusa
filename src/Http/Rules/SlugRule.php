@@ -1,6 +1,6 @@
 <?php
 
-namespace AppsLAb\Acl\Http\Rules;
+namespace AppsLab\Acl\Http\Rules;
 
 use Illuminate\Contracts\Validation\Rule;
 use Illuminate\Database\Eloquent\Model;
