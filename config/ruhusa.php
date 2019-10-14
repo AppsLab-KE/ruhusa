@@ -26,10 +26,13 @@ return [
   |
   */
     'tables' => [
-        'role' => 'roles',
+        'role' => "roles",
         'permission' => 'permissions',
         'users_roles' => 'users_roles',
         'users_permissions' => 'users_permissions',
         'roles_permissions' => 'roles_permissions',
-    ]
+    ],
+    'perPage' => 15,
+    'route-prefix' => 'demos',
+    'route-middleware' => 'web'
 ];

@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 
 class CreatePermission extends Command
 {
-    protected $signature = 'make:perm {-n|name} {-s|slug} {-d|description}';
+    protected $signature = 'make:perm {name} {slug?} {desc?}';
 
     protected $description = 'This will create permission in permission table';
 
@@ -18,30 +18,31 @@ class CreatePermission extends Command
 
     public function handle()
     {
-            $permModel = app(config('ruhusa.models.permission'));
+        $permModel = app(config('ruhusa.models.permission'));
 
-            if ($permModel){
-                try{
-                    $permission = $permModel->where('slug', $this->argument('slug'))
-                        ->orWhere('name', $this->argument('name'))->first();
+        if ($permModel){
+            try{
+                $permission = $permModel->where('slug', ($this->argument('slug' ?? str_slug($this->argument('name')))))
+                    ->orWhere('name', $this->argument('name'))->first();
 
-                    if (! is_null($permission)){
-                        throw  AlreadyExist::exception($this->argument('name').' permission');
-                    }
-
-                    $permModel->create([
-                        'name' => $this->argument('name'),
-                        'slug' => $this->argument('slug'),
-                        'description' => $this->argument('description')
-                    ]);
-
-                    $this->info($this->argument('name'). " permission was created successfully");
-                }catch (\Exception $exception){
-                    $this->error("Permission was not created");
+                if (!is_null($permission)){
+                    $this->error("\nPermission already exists\n");
+                    throw  AlreadyExist::exception($this->argument('name').' permission');
                 }
+
+                $permModel->create([
+                    'name' => $this->argument('name'),
+                    'slug' => ($this->argument('slug' ?? str_slug($this->argument('name')))),
+                    'description' => $this->argument('desc')
+                ]);
+
+                $this->info($this->argument('name'). " permission was created successfully");
+            }catch (\Exception $exception){
+                $this->error("Permission was not created");
             }
-            else{
-                $this->error("Check your permission class in ruhusa config");
-            }
+        }
+        else{
+            $this->error("Check your permission class in ruhusa config");
+        }
     }
 }

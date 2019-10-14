@@ -21,6 +21,12 @@ class InstallPackage extends Command
             '--tag' => 'ruhusa'
         ]);
 
+        if ($this->confirm("Install views?")){
+            $this->callSilent('vendor:publish',[
+                '--tag' => 'ruhusa-views'
+            ]);
+        }
+
         $this->info("You are ready to go");
         $this->comment("Add HasAcl to your User model: happy debugging 🐛");
     }
