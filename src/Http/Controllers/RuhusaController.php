@@ -3,7 +3,7 @@
 namespace AppsLab\Acl\Http\Controllers;
 
 
-use AppsLAb\Acl\Http\Rules\SlugRule;
+use AppsLab\Acl\Http\Rules\SlugRule;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 
