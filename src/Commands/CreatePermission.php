@@ -7,6 +7,9 @@ use Illuminate\Console\Command;
 
 class CreatePermission extends Command
 {
+    /**
+     * @var string
+     */
     protected $signature = 'make:perm {name} {slug?} {desc?}';
 
     protected $description = 'This will create permission in permission table';
