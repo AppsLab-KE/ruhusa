@@ -2,8 +2,11 @@
 
 namespace AppsLab\Acl\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+
+use AppsLAb\Acl\Http\Rules\SlugRule;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controller;
+
 class RuhusaController extends Controller
 {
     /**
@@ -12,7 +15,6 @@ class RuhusaController extends Controller
      */
     public function createRole()
     {
-//        dd('d');
         return view('ruhusa::acl.role-form-body')
             ->withPermissions(app(config('ruhusa.models.permission'))->all())
             ->withUsers(app(config('ruhusa.models.defaultUser'))->all());
@@ -24,7 +26,7 @@ class RuhusaController extends Controller
      */
     public function createPermission()
     {
-        return view('acl.permission-form-body')
+        return view('ruhusa::acl.permission-form-body')
             ->withRoles(app(config('ruhusa.models.role'))->all())
             ->withPermissions(app(config('ruhusa.models.permission'))->all());
     }
@@ -36,7 +38,7 @@ class RuhusaController extends Controller
      */
     public function editPermission($permission)
     {
-        return view('acl.permission-form-body')
+        return view('ruhusa::acl.permission-form-body')
             ->withRoles(app(config('ruhusa.models.role'))->all())
             ->withPermissions(app(config('ruhusa.models.permission'))->all())
             ->withPermission(app(config('ruhusa.models.permission'))->find($permission));
@@ -118,7 +120,7 @@ class RuhusaController extends Controller
         $roleModel = app(config('ruhusa.models.role'));
         $role =  $roleModel->findOrFail($role);
 
-        return view('acl.role-form-body')
+        return view('ruhusa::acl.role-form-body')
             ->withRole($role)
             ->withPermissions(app(config('ruhusa.models.permission'))->all())
             ->withUsers(app(config('ruhusa.models.defaultUser'))->all());
@@ -151,7 +153,7 @@ class RuhusaController extends Controller
             }
         }
 
-        return view('acl.role')
+        return view('ruhusa::acl.role')
             ->withRoles($roles->paginate(config('ruhusa.perPage')));
     }
 
@@ -171,7 +173,7 @@ class RuhusaController extends Controller
             }
         }
 
-        return view('acl.permission')
+        return view('ruhusa::acl.permission')
             ->withPermissions($permissions->paginate(config('ruhusa.perPage')));
     }
 
