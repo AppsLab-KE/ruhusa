@@ -8,12 +8,12 @@ trait HasAcl
 {
     public function roles()
     {
-        return $this->belongsToMany(config('ruhusa.models.role'));
+        return $this->belongsToMany(config('ruhusa.models.role'), config('ruhusa.tables.users_roles'));
     }
 
     public function permissions()
     {
-        return $this->belongsToMany(config('ruhusa.models.permission'));
+        return $this->belongsToMany(config('ruhusa.models.permission'), config('ruhusa.tables.users_permissions'));
     }
 
     public function hasRole(... $roles)
