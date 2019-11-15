@@ -33,6 +33,10 @@ return [
         'roles_permissions' => 'roles_permissions',
     ],
     'perPage' => 15,
-    'route-prefix' => 'demos',
-    'route-middleware' => 'web'
+    'route-prefix' => 'acl',
+    'login-route' => 'login',
+    'route-middleware' => 'web',
+    'messages' => [
+        'no-role' => "Permission denied"
+    ]
 ];

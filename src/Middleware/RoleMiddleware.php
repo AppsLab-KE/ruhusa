@@ -18,7 +18,8 @@ class RoleMiddleware
     public function handle($request, Closure $next, $roles)
     {
         if (Auth::guest()){
-            throw UnauthorizedException::unauthorizedTo("You are not logged in");
+            return redirect()->route(config('ruhusa.login-route'));
+            // throw UnauthorizedException::unauthorizedTo(config('ruhusa.messages.no-role'));
         }
 
         $roles = is_array($roles) ? $roles : explode("|", $roles);
@@ -29,6 +30,6 @@ class RoleMiddleware
             }
         }
 
-        throw UnauthorizedException::unauthorizedTo("User role not found");
+        throw UnauthorizedException::unauthorizedTo(config('ruhusa.messages.no-role'));
     }
 }

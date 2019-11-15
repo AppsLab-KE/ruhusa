@@ -18,7 +18,7 @@ class PermissionMiddleware
     public function handle($request, Closure $next, $permissions)
     {
         if (Auth::guest()){
-            throw UnauthorizedException::unauthorizedTo("You are not logged in");
+            return redirect()->route(config('ruhusa.login-route'));
         }
 
         $permissions = is_array($permissions) ? $permissions : explode("|", $permissions);
@@ -29,6 +29,6 @@ class PermissionMiddleware
             }
         }
 
-        throw UnauthorizedException::unauthorizedTo("Permission denied");
+        throw UnauthorizedException::unauthorizedTo(config('ruhusa.messages.no-permission'));
     }
 }
